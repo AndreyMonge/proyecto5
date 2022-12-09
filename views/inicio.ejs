@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <title>CRUD MongoPokedex</title>
+    <style>
+        .container {
+            max-width: 960px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="shadow-lg pb-3 mb-5 bg-body rounded">
+            <h4>Datos del pokemon</h4>
+            <form action="/crear" method="POST">
+                <div class="col-md-6">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input id="name" name="name" type="text" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="nombre" class="form-label">Tipo</label>
+                    <input id="tipo" name="tipo" type="text" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="nombre" class="form-label">Region</label>
+                    <input id="region" name="region" type="text" class="form-control" required>
+                </div>
+                <button typ="submit" class="w-100 btn btn-guardar btn-lg"><i class="bi bi-save"></i>Registrar
+                    pokemon</button>
+                
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <td>Nombre</td>
+                    <td>Tipo</td>
+                    <td>Region</td>
+                </tr>
+
+            </thead>
+            <tbody>
+                <% pokemons.forEach(function (pokemon) { %>
+                    <tr>
+                        <td>
+                            <%= pokemon.name %>
+                        </td>
+                        <td>
+                            <%= pokemon.tipo %>
+                        </td>
+                        <td>
+                            <%= pokemon.region %>
+                        </td>
+                        <td>
+                            <a type="button" class=".btnEditar btn btn-outline-primary bi bi-pencil"></a>
+                            <a href="/borrar/<%= pokemon._id %>" class="btn btn-outline-danger bi bi-trash"></a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <div id="modalPokemon" class="modal fade" tabindex="-1" aria-labelledby="modalPokemon" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar info</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/editar" method="POST">
+                            <input type="text" name="id_editar" id="id_editar" hidden>
+                            <div class="mb-3">
+                                <label for="nombre_editar" class="col-form-label">Nombre:</label>
+                                <input id="nombre_editar" name="nombre_editar" type="text" class="form-control" value="">
+                            </div>
+                            <div class="modal-foooter">
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                    </form>
+                </div>       
+            </div>
+        </div>
+    </div>
+      <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="code.js" type="application/json"></script>
+  </body>
+</html>
